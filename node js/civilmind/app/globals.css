@@ -1,0 +1,70 @@
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800&family=DM+Sans:wght@300;400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --font-cairo: 'Cairo', sans-serif;
+  --font-inter: 'DM Sans', sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #0a0f1a;
+  color: #e2e8f0;
+  font-family: var(--font-cairo), var(--font-inter), sans-serif;
+}
+
+/* RTL Support */
+[dir="rtl"] {
+  font-family: var(--font-cairo), sans-serif;
+}
+
+[dir="ltr"] {
+  font-family: var(--font-inter), sans-serif;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 4px;
+}
+::-webkit-scrollbar-track {
+  background: #0f1729;
+}
+::-webkit-scrollbar-thumb {
+  background: #1e2f50;
+  border-radius: 2px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #2a3f66;
+}
+
+/* Prose for AI responses */
+.prose-civil p { margin-bottom: 0.75rem; line-height: 1.8; }
+.prose-civil ul { list-style: disc; padding-inline-start: 1.5rem; margin-bottom: 0.75rem; }
+.prose-civil ol { list-style: decimal; padding-inline-start: 1.5rem; margin-bottom: 0.75rem; }
+.prose-civil li { margin-bottom: 0.25rem; }
+.prose-civil strong { color: #7dd3fc; font-weight: 600; }
+.prose-civil code {
+  background: #1a2744;
+  padding: 0.1rem 0.4rem;
+  border-radius: 4px;
+  font-size: 0.875rem;
+  font-family: 'Courier New', monospace;
+}
+
+/* Typing indicator */
+.typing-dot {
+  animation: typing 1s infinite;
+}
+.typing-dot:nth-child(2) { animation-delay: 0.2s; }
+.typing-dot:nth-child(3) { animation-delay: 0.4s; }
+
+@keyframes typing {
+  0%, 100% { opacity: 0.2; transform: scale(0.8); }
+  50% { opacity: 1; transform: scale(1); }
+}

@@ -1,0 +1,172 @@
+{
+  "name": "My workflow",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "civil-assistant",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        0,
+        0
+      ],
+      "id": "72c2e6b5-2fc4-46cc-8f05-f36d78a3f707",
+      "name": "Webhook",
+      "webhookId": "384ef5ae-9388-4e55-8802-9b796ffb8edd"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "http://host.docker.internal/v1/chat-messages",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "Bearer app-Segs77IWzLdoObOk1aXLYjiY"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"inputs\": {},\n  \"query\": \"{{ $('Webhook').item.json.body.question }}\",\n  \"response_mode\": \"blocking\",\n  \"conversation_id\": \"{{ $('Get Memory').item.json.result ?? '' }}\",\n  \"user\": \"{{ $('Webhook').item.json.body.user_id }}\"\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        416,
+        0
+      ],
+      "id": "f7a12a5b-9e97-4a6d-8a28-153f5e7914d1",
+      "name": "HTTP Request"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.5,
+      "position": [
+        752,
+        0
+      ],
+      "id": "84b4da3c-e4af-4f2c-8517-cd04235c1de0",
+      "name": "Respond to Webhook"
+    },
+    {
+      "parameters": {
+        "url": "=https://steady-monkfish-78759.upstash.io/get/{{ $json.body.user_id }}_conv",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "Bearer gQAAAAAAATOnAAIncDI0ZGMxZTIzMWZlYjE0MWQ0OGY0Y2NkNTdlMDk3Yzk1Y3AyNzg3NTk"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        208,
+        0
+      ],
+      "id": "e6158fd1-d94c-4515-be53-bf9b5ee45f02",
+      "name": "Get Memory"
+    },
+    {
+      "parameters": {
+        "url": "=https://steady-monkfish-78759.upstash.io/set/{{ $('Webhook').item.json.body.user_id }}_conv/{{ $('HTTP Request').item.json.conversation_id }}/ex/86400",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "Bearer gQAAAAAAATOnAAIncDI0ZGMxZTIzMWZlYjE0MWQ0OGY0Y2NkNTdlMDk3Yzk1Y3AyNzg3NTk"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        1072,
+        0
+      ],
+      "id": "75808393-d322-4f85-bedb-5f4f054d03ad",
+      "name": "Set Memory"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Get Memory",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request": {
+      "main": [
+        [
+          {
+            "node": "Respond to Webhook",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Respond to Webhook": {
+      "main": [
+        [
+          {
+            "node": "Set Memory",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Memory": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Set Memory": {
+      "main": [
+        []
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "versionId": "1e86b076-7a21-4e39-a72d-a969a71dc0dd",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "0e3104b37ccd27978e68d2216adbfd86c7bf72d4d0540de96d1994c2dec5bea0"
+  },
+  "id": "gDNhlxMmejoaQy8p",
+  "tags": []
+}
