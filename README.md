@@ -48,7 +48,7 @@ https://github.com/Abdelrahman-Nashaat/civil_mind/blob/main/docs/videos/demo-qa.
 
 ## 🏗️ Architecture
 
-![Architecture](docs/screenshots/architecture.png)
+![Architecture](docs/screenshots/architecture.svg)
 ```
 User
  ↓
