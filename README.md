@@ -36,16 +36,19 @@ https://github.com/Abdelrahman-Nashaat/civil_mind/blob/main/docs/videos/demo-qa.
 
 ## 🖼️ Screenshots
 
-| Arabic Query | English Query |
+| Landing Page | Chat Interface |
 |---|---|
-| ![Arabic Demo](docs/screenshots/image.png) | ![English Demo](docs/screenshots/image2.png) |
+| ![Landing](docs/screenshots/image.png) | ![Chat](docs/screenshots/image3.png) |
+
+| AI Response (Arabic) |
+|---|
+| ![Response](docs/screenshots/image4.png) |
 
 ---
 
 ## 🏗️ Architecture
 
 ![Architecture](docs/screenshots/architecture.png)
-
 ```
 User
  ↓
